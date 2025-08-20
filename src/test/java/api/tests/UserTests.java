@@ -48,7 +48,7 @@ public class UserTests {
 	
 
 	@Test(priority=2)
-	public void getUser() {
+	public void getUser() throws InterruptedException {
 	    
 		System.out.println("Fetching user with username: " + userPayload.getUsername());
 
@@ -65,7 +65,7 @@ Assert.assertEquals(response.jsonPath().getString("firstName"), userPayload.getF
 	}
 	
 	@Test(priority=3)
-	public void updateUser() {
+	public void updateUser() throws InterruptedException {
 		
 		userPayload.setFirstName(faker.name().firstName());
         userPayload.setLastName(faker.name().lastName());
@@ -77,7 +77,7 @@ Assert.assertEquals(response.jsonPath().getString("firstName"), userPayload.getF
         Assert.assertEquals(response.getStatusCode(), 200);
         
         Response afterUpdateResponse = UserEndpoints.getUser(this.userPayload.getUsername());
-//        Assert.assertEquals(afterUpdateResponse.getStatusCode(), 200);
+        Assert.assertEquals(afterUpdateResponse.getStatusCode(), 200);
 		
 	}
 	

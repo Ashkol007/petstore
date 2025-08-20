@@ -11,7 +11,6 @@ public class UserEndpoints {
 	public static Response createUser(User payload) {
 		
 		Response response = given()
-		 .log().body()		
 		 .contentType(ContentType.JSON)
 		 .accept(ContentType.JSON)
          .body(payload)		
@@ -22,12 +21,18 @@ public class UserEndpoints {
 		
 	}
 	
-     public static Response getUser(String username) {
+     public static Response getUser(String username) throws InterruptedException {
 		
-		Response response = given()
-		 .pathParam("username",username)
- 		 .when()
- 		 .get(Routes.get_url);
+    	 Response response = null;
+    	    for (int i = 0; i < 3; i++) {
+    	        response = given()
+    	            .pathParam("username", username)
+    	            .when()
+    	            .get(Routes.get_url);
+
+    	        if (response.getStatusCode() == 200) break;
+    	        Thread.sleep(1000); // wait 1s before retry
+    	    }
 		
 		return response;
 		
