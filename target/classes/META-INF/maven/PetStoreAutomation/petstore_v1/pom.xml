@@ -12,6 +12,7 @@
   <url>http://www.example.com</url>
 
   <properties>
+  <configuration-suite>testng.xml</configuration-suite>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
   </properties>
@@ -29,17 +30,18 @@
   </dependencyManagement>
 
   <dependencies>
-    <dependency>
+    <!-- <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- Optionally: parameterized tests support -->
+    <! Optionally: parameterized tests support 
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
       <scope>test</scope>
-    </dependency>
+    </dependency> 
+    -->
     
     <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
 <dependency>
@@ -49,13 +51,6 @@
     <scope>test</scope>
 </dependency>  
 
-<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
-<dependency>
-    <groupId>io.rest-assured</groupId>
-    <artifactId>rest-assured</artifactId>
-    <version>5.5.1</version>
-    <scope>test</scope>
-</dependency>
 
 <!-- https://mvnrepository.com/artifact/org.json/json -->
 <dependency>
@@ -122,6 +117,27 @@
     <version>5.4.1</version>
 </dependency>
 
+<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+<dependency>
+    <groupId>com.aventstack</groupId>
+    <artifactId>extentreports</artifactId>
+    <version>5.1.2</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-core</artifactId>
+    <version>2.25.1</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-api</artifactId>
+    <version>2.25.1</version>
+</dependency>
+
     
   </dependencies>
 
@@ -138,18 +154,34 @@
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.3.1</version>
         </plugin>
+        
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.13.0</version>
+           <configuration>
+        <source>21</source>  <!-- or 11, depending on your JDK -->
+        <target>21</target>
+      </configuration>
+          
         </plugin>
+        
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.3.0</version>
+           <configuration>
+          <suiteXmlFiles>
+           <suiteXmlFile>testng.xml</suiteXmlFile>
+          </suiteXmlFiles>
+          </configuration>
+         
         </plugin>
+        
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.4.2</version>
         </plugin>
+        
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
           <version>3.1.2</version>
