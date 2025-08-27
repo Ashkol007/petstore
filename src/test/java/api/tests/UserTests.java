@@ -1,5 +1,9 @@
 package api.tests;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -14,6 +18,8 @@ public class UserTests {
 	
 	Faker faker;
 	User  userPayload;
+	User  userPayload1;
+	List<User> userList;
 	
 	@BeforeClass
 	public void setup() {
@@ -29,6 +35,22 @@ public class UserTests {
 		userPayload.setPhone(faker.phoneNumber().phoneNumber());
 		userPayload.setUsername("user" + faker.number().numberBetween(1000, 9999));
 		userPayload.setUserStatus(1); 
+		
+        userPayload1 = new User();
+		
+		userPayload.setId(faker.number().numberBetween(1, 1000));
+		userPayload.setFirstName(faker.name().firstName());
+		userPayload.setLastName(faker.name().lastName());
+		userPayload.setEmail(faker.internet().emailAddress());
+		userPayload.setPassword(faker.internet().password(5,10));
+		userPayload.setPhone(faker.phoneNumber().phoneNumber());
+		userPayload.setUsername("user" + faker.number().numberBetween(1000, 9999));
+		userPayload.setUserStatus(1); 
+		
+		userList = new ArrayList<>();
+		userList.add(userPayload);
+		userList.add(userPayload1);
+		
 		
 	}
 	
@@ -46,8 +68,33 @@ public class UserTests {
 		
 	}
 	
-
+	@Test()
+	public void createUsers() {
+		
+		 
+	               System.out.println("userList : "+userList);
+		
+		Response response = UserEndpoints.createUsers(userList);
+		         response.then().log().all();
+		         
+		         
+		         
+		         Assert.assertEquals(response.getStatusCode(),200);
+		
+	}
+	
 	@Test(priority=2)
+	public void loginUser(){
+		Response response = UserEndpoints.loginUser(userPayload.getUsername(), userPayload.getPassword());
+		         response.then().log().all();
+		         
+		         Assert.assertEquals(response.getStatusCode(), 200);
+		         Assert.assertTrue(response.jsonPath().getString("message").contains("logged in user session"));
+		         System.out.println("response.jsonPath() : "+response.jsonPath().getString("message"));
+	}
+	
+
+	@Test(priority=3)
 	public void getUser() throws InterruptedException {
 	    
 		System.out.println("Fetching user with username: " + userPayload.getUsername());
@@ -64,7 +111,7 @@ Assert.assertEquals(response.jsonPath().getString("firstName"), userPayload.getF
 		
 	}
 	
-	@Test(priority=3)
+	@Test(priority=4)
 	public void updateUser() throws InterruptedException {
 		
 		userPayload.setFirstName(faker.name().firstName());
@@ -82,11 +129,23 @@ Assert.assertEquals(response.jsonPath().getString("firstName"), userPayload.getF
 	}
 	
 	
-	@Test(priority=4)
+	@Test(priority=5)
 	public void deleteUser() {
 		
 		Response response = UserEndpoints.deleteUser(this.userPayload.getUsername());
 		        Assert.assertEquals(response.getStatusCode(), 200);
 	}
+	
+
+	@Test(priority=6)
+	public void logoutUser() {
+		
+		Response response = UserEndpoints.logoutUser();
+		         response.then().log().all(); 
+		        Assert.assertEquals(response.getStatusCode(), 200);
+	}
+	
+	
+	
 
 }

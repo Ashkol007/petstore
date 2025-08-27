@@ -3,6 +3,8 @@ package api.endpoints;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.*;
 
+import java.util.List;
+
 import api.payloads.User;
 import io.restassured.http.ContentType;
 
@@ -16,6 +18,19 @@ public class UserEndpoints {
          .body(payload)		
  		.when()
  		 .post(Routes.post_url);
+		
+		return response;
+		
+	}
+	
+   public static Response createUsers(List<User> payload) {
+		
+		Response response = given()
+		 .contentType(ContentType.JSON)
+		 .accept(ContentType.JSON)
+         .body(payload)		
+ 		.when()
+ 		 .post(Routes.postUsers_url);
 		
 		return response;
 		
@@ -62,6 +77,32 @@ public class UserEndpoints {
   		return response;
   		
   	}
+      
+      public static Response loginUser(String username,String password) {
+    		
+    		Response response = given()
+    		 .queryParam("username",username)
+    		 .queryParam("password", password)
+    		 .accept(ContentType.JSON)
+     		.when()
+     		 .get(Routes.login_url);
+    		
+    		return response;
+    		
+    	}
+      
+      public static Response logoutUser() {
+  		
+  		Response response = given()
+  		 .accept(ContentType.JSON)
+   		.when()
+   		 .get(Routes.logout_url);
+  		
+  		return response;
+  		
+  	}
+      
+      
 	
 
 }
