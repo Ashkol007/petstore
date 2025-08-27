@@ -15,6 +15,12 @@ public class Routes {
 	public static String postUsers_url = baseurl +"/user/createWithArray";
 	
 	
+//	Store Routes
+	
+	public static String getStore_url = baseurl + "/store/inventory";
+	public static String postOrder_url = baseurl + "/store/order";
+	
+	
 	
 	
 	

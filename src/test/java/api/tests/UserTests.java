@@ -76,10 +76,11 @@ public class UserTests {
 		
 		Response response = UserEndpoints.createUsers(userList);
 		         response.then().log().all();
-		         
+		         response.jsonPath().toString();
 		         
 		         
 		         Assert.assertEquals(response.getStatusCode(),200);
+
 		
 	}
 	
