@@ -67,14 +67,19 @@ public class ExtentReportManager implements ITestListener {
 	
 	public void onTestSuccess(ITestResult result) {
 		
-		test = extent.createTest(result.getMethod().getMethodName());
+		String testName = "<span style='color:blue; font-weight:bold;'>" 
+                + result.getTestClass().getName() + "</span> : "  + result.getMethod().getMethodName();
+	    test = extent.createTest(testName);
 		test.assignCategory(result.getMethod().getGroups());
 		test.log(Status.PASS, result.getName()+" got successfully executed");
 		
 		}
 	
 	public void onTestFailure(ITestResult result) {
-		test = extent.createTest(result.getTestClass().getName());
+		
+		String testName = "<span style='color:blue; font-weight:bold;'>" 
+                + result.getTestClass().getName() + "</span> : " + result.getMethod().getMethodName();
+	    test = extent.createTest(testName);
 		test.assignCategory(result.getMethod().getGroups());
 		test.log(Status.FAIL, result.getName()+" got Failed");
 		test.log(Status.INFO, result.getThrowable().getMessage());
@@ -82,7 +87,10 @@ public class ExtentReportManager implements ITestListener {
 	}
 	
 	public void onTestSkip(ITestResult result){
-		test = extent.createTest(result.getTestClass().getName());
+		
+		String testName = "<span style='color:blue; font-weight:bold;'>" 
+                + result.getTestClass().getName() + "</span> : "  + result.getMethod().getMethodName();
+        test = extent.createTest(testName);
 		test.assignCategory(result.getMethod().getGroups());
 		test.log(Status.SKIP,result.getName()+" test skipped");
 		test.log(Status.INFO, result.getThrowable().getMessage());
