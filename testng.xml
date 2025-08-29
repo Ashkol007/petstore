@@ -15,6 +15,8 @@
     <classes>
       <class name="api.tests.UserTests"/>
       <class name="api.tests.DdUserTests"/>
+      <class name="api.tests.PetTests"/>
+      <class name="api.tests.StoreTests"/>
     </classes>
     
     </test> <!-- Test -->
