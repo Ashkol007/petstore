@@ -19,6 +19,8 @@ public class Routes {
 	
 	public static String getStore_url = baseurl + "/store/inventory";
 	public static String postOrder_url = baseurl + "/store/order";
+    public static String getOrder_url = baseurl + "/store/order/{orderId}";
+    public static String deleteOrder_url = baseurl + "/store/order/{orderId}";
 	
 	
 	

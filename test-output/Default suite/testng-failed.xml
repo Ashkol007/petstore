@@ -6,7 +6,7 @@
       <class name="api.tests.StoreTests">
         <methods>
           <include name="setup"/>
-          <include name="createOrder"/>
+          <include name="deleteOrder"/>
         </methods>
       </class> <!-- api.tests.StoreTests -->
     </classes>

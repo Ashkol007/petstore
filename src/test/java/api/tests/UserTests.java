@@ -133,7 +133,7 @@ Assert.assertEquals(response.jsonPath().getString("firstName"), userPayload.getF
 	@Test(priority=5)
 	public void deleteUser() {
 		
-		Response response = UserEndpoints.deleteUser(this.userPayload.getUsername());
+		Response response = UserEndpoints.deleteUser(userPayload.getUsername());
 		        Assert.assertEquals(response.getStatusCode(), 200);
 	}
 	

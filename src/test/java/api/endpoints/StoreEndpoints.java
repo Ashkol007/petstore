@@ -34,5 +34,48 @@ public class StoreEndpoints {
 				
 		
 	} 
+	
+    public static Response getOrder(int orderId) throws InterruptedException {
+    	
+    	
+    	Response response = null;
+	    for (int i = 0; i < 3; i++) {
+	        response = given()
+	        		.accept(ContentType.JSON)
+				     .contentType(ContentType.JSON)
+				     .pathParam("orderId",orderId)
+				     .when()
+				     .get(Routes.getOrder_url);
+
+	        if (response.getStatusCode() == 200) break;
+	        Thread.sleep(1000); // wait 1s before retry
+	    }
+			     
+		return response; 
+				
+		
+	} 
+    
+    public static Response deleteOrder(int orderId) throws InterruptedException {
+    	
+    	
+    	Response response = null;
+	    for (int i = 0; i < 3; i++) {
+	    	
+	        response = given()
+	        		.accept(ContentType.JSON)
+				     .contentType(ContentType.JSON)
+				     .pathParam("orderId",orderId)
+				     .when()
+				     .delete(Routes.deleteOrder_url);
+
+	        if (response.getStatusCode() == 200) break;
+	        Thread.sleep(1000); // wait 1s before retry
+	    }
+			     
+		return response; 
+				
+		
+	} 
 
 }

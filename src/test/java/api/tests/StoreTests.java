@@ -50,10 +50,33 @@ public class StoreTests {
 		
 	}
 	
-	@Test()
+	@Test(priority=2)
 	public void createOrder() {
 		
 		Response response = StoreEndpoints.postOrder(order);
+		         response.then().log().all();
+		         response.jsonPath().toString();
+		         
+		         Assert.assertEquals(response.getStatusCode(), 200);
+		
+	}
+	
+	
+	@Test(priority=3)
+	public void getOrder() throws InterruptedException {
+		
+		Response response = StoreEndpoints.getOrder(order.getId());
+		         response.then().log().all();
+		         response.jsonPath().toString();
+		         
+		         Assert.assertEquals(response.getStatusCode(), 200);
+		
+	}
+	
+	@Test(priority=4)
+	public void deleteOrder() throws InterruptedException {
+		
+		Response response = StoreEndpoints.deleteOrder(order.getId());
 		         response.then().log().all();
 		         response.jsonPath().toString();
 		         
