@@ -4,6 +4,7 @@ import static io.restassured.RestAssured.*;
 
 import java.io.File;
 
+import api.payloads.Pet;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
@@ -20,6 +21,20 @@ public class PetEndPoints {
 			     .multiPart("file",file)
 			     .when()
 			     .post(Routes.postPetImage_url);
+		
+		return response;
+		
+	}
+	
+    public static Response postPet(Pet payload) {
+	
+		
+		Response response = given()
+			     .accept(ContentType.JSON)
+			     .contentType(ContentType.JSON)
+			     .body(payload)
+			     .when()
+			     .post(Routes.postPet_url);
 		
 		return response;
 		

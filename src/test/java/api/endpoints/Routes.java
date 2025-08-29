@@ -26,6 +26,7 @@ public class Routes {
 //  Pet Routes
     
     public static String postPetImage_url = baseurl + "/pet/1/uploadImage";
+    public static String postPet_url = baseurl + "/pet";
 	
 	
 	
