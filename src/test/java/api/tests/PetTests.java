@@ -79,6 +79,22 @@ public class PetTests {
 		
 		
 	}
+
+	@Test(priority=3)
+	public void putPet() {
+		
+
+		
+		Response response = PetEndPoints.putPet(petPayload);
+		         response.then().log().all();
+		         System.out.println(response.jsonPath().getString("message"));
+		         System.out.println(response.time());
+                                  		         
+		         Assert.assertEquals(response.getStatusCode(), 200);
+		        
+		
+		
+	}
 	
 	
 

@@ -39,6 +39,20 @@ public class PetEndPoints {
 		return response;
 		
 	}
+    
+   public static Response putPet(Pet payload) {
+	
+		
+		Response response = given()
+			     .accept(ContentType.JSON)
+			     .contentType(ContentType.JSON)
+			     .body(payload)
+			     .when()
+			     .put(Routes.putPet_url);
+		
+		return response;
+		
+	}
 	
 	
 }
